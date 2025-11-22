@@ -1,0 +1,100 @@
+﻿<Page x:Class="WarehouseMaster.WPF.Pages.SupplierPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WarehouseMaster.WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1000"
+        Title="Поставщики" Loaded="Page_Loaded">
+
+    <Grid Background="#CCDEAA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Добавление поставщика" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="Компания:"/>
+                    <TextBlock Text="Контактное лицо:"/>
+                    <TextBlock Text="Телефон:"/>
+                    <TextBlock Text="Email:"/>
+                    <TextBlock Text="Адрес:"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="AddCompanyNameTextBox"/>
+                    <TextBox x:Name="AddContactPersonTextBox"/>
+                    <TextBox x:Name="AddPhoneTextBox"/>
+                    <TextBox x:Name="AddEmailTextBox"/>
+                    <TextBox x:Name="AddAddressTextBox"/>
+
+                    <Button Content="Создать" Click="CreateSupplier_Click"/>
+
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Редактирование поставщика" 
+                  Grid.Row="1" Grid.Column="0" 
+                  Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left">
+                    
+                    <TextBlock Text="Id"/>
+                    <TextBlock Text="Компания:"/>
+                    <TextBlock Text="Контактное лицо:"/>
+                    <TextBlock Text="Телефон:"/>
+                    <TextBlock Text="Email:"/>
+                    <TextBlock Text="Адрес:"/>
+                    
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    
+                    <TextBox x:Name="WorkerIdTextBox" IsReadOnly="True" Background="LightGray"/>
+                    <TextBox x:Name="WorkerCompanyNameTextBox"/>
+                    <TextBox x:Name="WorkerContactPersonTextBox"/>
+                    <TextBox x:Name="WorkerPhoneTextBox"/>
+                    <TextBox x:Name="WorkerEmailTextBox"/>
+                    <TextBox x:Name="WorkerAddressTextBox"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        
+                        <Button Content="Обновить" Click="UpdateSupplier_Click"/>
+                        <Button Content="Удалить" Click="DeleteSupplier_Click"/>
+                        
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Список поставщиков" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+            <StackPanel>
+                <ScrollViewer>
+                    <DataGrid x:Name="DataGridUI" SelectionChanged="DataGridUI_SelectionChanged" 
+                              AutoGenerateColumns="True" Height="350"/>
+                </ScrollViewer>
+                <Button Content="Обновить список" Click="GetAllSupplier_Click" 
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Page>

@@ -1,0 +1,91 @@
+﻿<Page x:Class="WarehouseMaster.WPF.Pages.ProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WarehouseMaster.WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+       Title="Продукты" Loaded="Page_Loaded">
+
+    <Grid Background="#CCDEAA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Добавление продукта" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="Название:"/>
+                    <TextBlock Text="Описание:"/>
+                    <TextBlock Text="Цена:"/>
+                    <TextBlock Text="Тип:"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="AddNameTextBox"/>
+                    <TextBox x:Name="AddDescriptionTextBox"/>
+                    <TextBox x:Name="AddPriceTextBox" Text="0"/>
+                    <TextBox x:Name="AddTypeTextBox"/>
+
+                    <Button Content="Создать" Click="CreateProduct_Click"/>
+
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Редактирование продукта" 
+                  Grid.Row="1" Grid.Column="0" 
+                  Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="Id"/>
+                    <TextBlock Text="Название:"/>
+                    <TextBlock Text="Описание:"/>
+                    <TextBlock Text="Цена:"/>
+                    <TextBlock Text="Тип:"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="WorkerIdTextBox" IsReadOnly="True" Background="LightGray"/>
+                    <TextBox x:Name="WorkerNameTextBox"/>
+                    <TextBox x:Name="WorkerDescriptionTextBox"/>
+                    <TextBox x:Name="WorkerPriceTextBox"/>
+                    <TextBox x:Name="WorkerTypeTextBox"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Обновить" Click="UpdateProduct_Click"/>
+                        <Button Content="Удалить" Click="DeleteProduct_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Список продуктов" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+            <StackPanel>
+                <ScrollViewer>
+                    <DataGrid x:Name="DataGridUI" SelectionChanged="DataGridUI_SelectionChanged" 
+                              AutoGenerateColumns="True" Height="370"/>
+                </ScrollViewer>
+                <Button Content="Обновить список" Click="GetAllProduct_Click" 
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Page>

@@ -1,0 +1,89 @@
+﻿<Window x:Class="WarehouseMaster.WPF.Windows.ProfileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseMaster.WPF.Windows"
+        mc:Ignorable="d"
+        Title="Профиль" Height="250" Width="500"
+        Loaded="Window_Loaded"  >
+
+    <Grid Background="#ADBD91">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="OpenAuthWindow" Content="Выход" Grid.Row="0" Grid.Column="1" Margin="5" Width="50" HorizontalAlignment="Right" Click="OpenAuthWindow_Click"/>
+
+        <GroupBox Header="Мои данные"
+            Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+                  Margin="5" Background="#CCDEAA">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Column="0">
+
+                    <TextBlock Text="ФИО:" Margin="5"/>
+                    <TextBlock Text="Email:" Margin="5"/>
+                    <TextBlock Text="Пароль:" Margin="5"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+
+                    <TextBox Name="FullNameTextBlock" IsReadOnly="True" Margin="5"/>
+                    <TextBox Name="EmailTextBlock" Margin="5"/>
+                    <TextBox Name="PasswordTextBlock" Margin="5"/>
+
+                </StackPanel>
+
+                <Button x:Name="EmployeeUpdate" Click="EmployeeUpdate_Click"
+                    Grid.Column="1" Grid.Row="1"
+                        Content="Обновить" VerticalAlignment="Top"/>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Метрики" Margin="5"
+                  Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+
+                    <TextBlock Text="Кол-во моих заказов: "/>
+                    <TextBlock Text="Кол-во моих поставщиков: "/>
+
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1">
+
+                    <TextBlock x:Name="MyOrderCoutn"/>
+                    <TextBlock x:Name="MySupplierCount"/>
+
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

@@ -1,0 +1,43 @@
+﻿<Window x:Class="WarehouseMaster.WPF.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseMaster.WPF.Windows"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="830" Width="1200" 
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Background="#ADBD91">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"
+               x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+
+        <Button x:Name="OpenProfileWindow" Content="Профиле" Click="OpenProfileWindow_Click"
+                Grid.Column="2" HorizontalAlignment="Right"/>
+
+        <StackPanel Grid.Row="1" Grid.RowSpan="2">
+
+            <Button x:Name="OpenOrderPage" Content="Заказы" Click="OpenOrderPage_Click"/>
+            <Button x:Name="OpenSupplierPage" Content="Поставщики" Click="OpenSupplierPage_Click" Margin="5 5 5 20"/>
+            <Button x:Name="OpenProductPage" Content="Товары" Click="OpenProductPage_Click"/>
+            <Button x:Name="OpenLocationPage" Content="Локации" Click="OpenLocationPage_Click"/>
+            <Button x:Name="OpenPalletPage" Content="Паллеты" Click="OpenPalletPage_Click"/>
+            <Button x:Name="OpenEmployeePage" Content="Работники" Click="OpenEmployeePage_Click" Margin="5 20 5 5"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

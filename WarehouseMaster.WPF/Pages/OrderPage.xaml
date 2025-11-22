@@ -1,0 +1,185 @@
+﻿<Page x:Class="WarehouseMaster.WPF.Pages.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WarehouseMaster.WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1000"
+        Title="Заказы" Loaded="Page_Loaded">
+
+    <Grid Background="#CCDEAA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal" VerticalAlignment="Center"
+                    Background="#BAB969" Margin="5">
+
+            <TextBlock Text="Название продукта:" Margin="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="productNameTextBox" Width="150" Margin="5" VerticalAlignment="Center"/>
+
+            <TextBlock Text="Компания поставщика:" Margin="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="supplierCompanyTextBox" Width="150" Margin="5" VerticalAlignment="Center"/>
+
+            <TextBlock Text="ФИО сотрудника:" Margin="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="employeeNameTextBox" Width="150" Margin="5" VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Добавление заказа" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="Кол-во продуктов:"/>
+                    <TextBlock Text="Кол-во паллет:"/>
+                    <TextBlock Text="Общая цена:"/>
+                    <TextBlock Text="Продукт:" Margin="5 12 5 5"/>
+                    <TextBlock Text="Сотрудник:" Margin="5 18 5 5"/>
+                    <TextBlock Text="Локация:" Margin="5 16 5 5"/>
+                    <TextBlock Text="Поставщик:" Margin="5 18 5 5"/>
+                    <TextBlock Text="Паллета:" Margin="5 16 5 5"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="AddProductCountTextBox" Text="0" Margin="4"/>
+                    <TextBox x:Name="AddPalletCountTextBox" Text="0" Margin="4"/>
+                    <TextBox x:Name="AddTotalPriceTextBox" Text="0" Margin="4"/>
+                    <ComboBox x:Name="AddProductComboBox" DisplayMemberPath="Name" Margin="4"/>
+                    <ComboBox x:Name="AddEmployeeComboBox" DisplayMemberPath="FullName" Margin="4"/>
+                    <ComboBox x:Name="AddLocationComboBox" DisplayMemberPath="Name" Margin="4"/>
+                    <ComboBox x:Name="AddSupplierComboBox" DisplayMemberPath="CompanyName" Margin="4"/>
+                    <ComboBox x:Name="AddPalletComboBox" DisplayMemberPath="Id" Margin="4"/>
+
+                    <Button Content="Создать" Click="CreateOrder_Click" Width="120" Margin="10" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Редактирование заказа" 
+                  Grid.Row="1" Grid.Column="0" 
+                  Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock Text="Id"/>
+                    <TextBlock Text="Дата/время:"/>
+                    <TextBlock Text="Кол-во продуктов:"/>
+                    <TextBlock Text="Кол-во паллет:"/>
+                    <TextBlock Text="Общая цена:"/>
+                    <TextBlock Text="Продукт:" Margin="5 12 5 5"/>
+                    <TextBlock Text="Сотрудник:" Margin="5 18 5 5"/>
+                    <TextBlock Text="Локация:" Margin="5 16 5 5"/>
+                    <TextBlock Text="Поставщик:" Margin="5 18 5 5"/>
+                    <TextBlock Text="Паллета:" Margin="5 16 5 5"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBox x:Name="WorkerIdTextBox" IsReadOnly="True" Background="LightGray" Margin="4"/>
+                    <TextBox x:Name="WorkerDateTimeTextBox" IsReadOnly="True" Background="LightGray" Margin="4"/>
+                    <TextBox x:Name="WorkerProductCountTextBox" Margin="4"/>
+                    <TextBox x:Name="WorkerPalletCountTextBox" Margin="4"/>
+                    <TextBox x:Name="WorkerTotalPriceTextBox" Margin="4"/>
+                    <ComboBox x:Name="WorkerProductComboBox" DisplayMemberPath="Name" Margin="4"/>
+                    <ComboBox x:Name="WorkerEmployeeComboBox" DisplayMemberPath="FullName" Margin="4"/>
+                    <ComboBox x:Name="WorkerLocationComboBox" DisplayMemberPath="Name" Margin="4"/>
+                    <ComboBox x:Name="WorkerSupplierComboBox" DisplayMemberPath="CompanyName" Margin="4"/>
+                    <ComboBox x:Name="WorkerPalletComboBox" DisplayMemberPath="Id" Margin="4"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Обновить" Click="UpdateOrder_Click" Width="100" Margin="5"/>
+                        <Button Content="Удалить" Click="DeleteOrder_Click" Width="100" Margin="5"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Список заказов" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+            <ScrollViewer>
+                <StackPanel>
+                    <DataGrid x:Name="DataGridUI" 
+                         SelectionChanged="DataGridUI_SelectionChanged" 
+                         AutoGenerateColumns="False"
+                         Height="300"
+                         Margin="5"
+                         IsReadOnly="True"
+                         HeadersVisibility="All"
+                         GridLinesVisibility="Horizontal"
+                         BorderThickness="1">
+
+                        <DataGrid.Columns>
+                            <!-- Дата/время -->
+                            <DataGridTextColumn Header="Дата/время" 
+                                          Binding="{Binding DateTime, StringFormat=dd.MM.yyyy HH:mm}"
+                                          />
+
+                            <!-- Продукт -->
+                            <DataGridTextColumn Header="Продукт" 
+                                          Binding="{Binding Product.Name}"
+                                          />
+
+                            <!-- Количество продуктов -->
+                            <DataGridTextColumn Header="Продукты" 
+                                          Binding="{Binding ProductCount}"
+                                          />
+
+                            <!-- Количество паллет -->
+                            <DataGridTextColumn Header="Палеты" 
+                                          Binding="{Binding PalletCount}"
+                                          />
+
+                            <!-- Общая цена -->
+                            <DataGridTextColumn Header="Общая цена" 
+                                          Binding="{Binding TotalPrice, StringFormat=F2}"
+                                          />
+
+                            <!-- Сотрудник -->
+                            <DataGridTextColumn Header="Сотрудник" 
+                                          Binding="{Binding Employee.FullName}"
+                                          />
+
+                            <!-- Локация -->
+                            <DataGridTextColumn Header="Локация" 
+                                          Binding="{Binding Location.Name}"
+                                          />
+
+                            <!-- Поставщик -->
+                            <DataGridTextColumn Header="Поставщик" 
+                                          Binding="{Binding Supplier.CompanyName}"
+                                          />
+
+                            <!-- Паллета -->
+                            <DataGridTextColumn Header="ID паллеты" 
+                                          Binding="{Binding Pallet.Id}"
+                                          />
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                        <Button Content="Показать всё" 
+                            Click="GetAllOrder_Click" />
+
+                        <Button Content="Показать по фильтрам" 
+                            Click="Search_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Page>
